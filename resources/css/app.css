@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.leaflet-popup-content {
+    width: 700px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaflet-popup {
+    max-width: 900px !important;
+}
+
+.popup-content {
+    width: 650px;
+    height: 200px;
+    margin: 0 auto; /* Centers block-level elements */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
