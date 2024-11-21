@@ -6,6 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class NoiseLevel extends Model
 {
-    protected $fillable = ['hourly_average', 'location_id'];
-
+    protected $fillable = ['hourly_average', 'location_id', 'created_at'];
 }

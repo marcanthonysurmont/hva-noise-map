@@ -2,22 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NoiseLevel;
+use App\Services\NoiseLevelBufferService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class NoiseLevelStoreController extends Controller
 {
+    private NoiseLevelBufferService $bufferService;
+
+    public function __construct(NoiseLevelBufferService $bufferService)
+    {
+        $this->bufferService = $bufferService;
+    }
+
     public function __invoke(Request $request)
     {
         $validated = $request->validate([
             'decibel_value' => 'required|numeric'
         ]);
 
-        $noiseLevel = new NoiseLevel();
-        $noiseLevel->hourly_average = $validated['decibel_value'];
-        $noiseLevel->location_id = 1;
-        $noiseLevel->save();
+        Log::info("Received reading", [
+            'value' => $validated['decibel_value'],
+            'time' => now()->format('Y-m-d H:i:s')
+        ]);
 
-        return response()->json(['message' => 'Reading stored']);
+        $this->bufferService->addReading($validated['decibel_value']);
+        return response()->json(['message' => 'Reading buffered']);
     }
 }
