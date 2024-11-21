@@ -1,5 +1,5 @@
-name: noise-map
-type: php
+name: noisemapper
+type: laravel
 docroot: public
 php_version: "8.2"
 webserver_type: nginx-fpm
