@@ -49,6 +49,7 @@ try:
                 value = float(line)
                 now = datetime.now()
                 elapsed = (now - start_time).total_seconds()
+                target_minutes = 60 - datetime.now().minute  # Gets remaining minutes until next hour
                 logging.info(f"""
                 Reading: {value}
                 Time: {now.strftime('%H:%M:%S')}
@@ -83,9 +84,6 @@ try:
                         },
                         verify=False
                     )
-                    
-                    logging.info(f"API Response: {response.status_code}")
-                    logging.info(f"Response body: {response.text}")
 
                     # Reset for next period
                     readings_buffer = []
